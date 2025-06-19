@@ -1,1 +1,1 @@
-# subtractivesynthIML
+# euclideanIML
