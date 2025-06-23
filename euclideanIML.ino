@@ -8,6 +8,7 @@
 
 // Example apps and interfaces
 #include "src/memllib/examples/IMLInterface.hpp"
+#include "src/memllib/examples/InterfaceRL.hpp"
 
 #include "src/memllib/hardware/memlnaut/display.hpp"
 
@@ -21,8 +22,9 @@
 
 
 // Global objects
+const char FIRMWARE_NAME[] = "-- Euclidean sequencer CARL --";
 using CURRENT_AUDIO_APP = EuclideanAudioApp;
-using CURRENT_INTERFACE = IMLInterface;
+using CURRENT_INTERFACE = InterfaceRL;
 std::shared_ptr<CURRENT_INTERFACE> interface;
 std::shared_ptr<CURRENT_AUDIO_APP> audio_app;
 std::shared_ptr<MIDIInOut> midi_interf;
@@ -83,7 +85,7 @@ void setup()
     // Setup display
     disp = std::make_shared<display>();
     disp->setup();
-    disp->post("MEMLNaut IML Euclidean");
+    disp->post(FIRMWARE_NAME);
 
     // Set up euclidean outputs: I2C
     useq_i2c = std::make_unique<USeqI2C>();
