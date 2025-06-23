@@ -19,6 +19,7 @@
 
 /******************************* */
 
+const char FIRMWARE_NAME[] = "-- Euclidean sequencer POPR --";
 
 // Global objects
 using CURRENT_AUDIO_APP = EuclideanAudioApp;
@@ -83,7 +84,7 @@ void setup()
     // Setup display
     disp = std::make_shared<display>();
     disp->setup();
-    disp->post("MEMLNaut IML Euclidean");
+    disp->post(FIRMWARE_NAME);
 
     // Set up euclidean outputs: I2C
     useq_i2c = std::make_unique<USeqI2C>();
@@ -122,11 +123,6 @@ void setup()
     Serial.println("Bound interface to UART input.");
     interface->bindMIDI(midi_interf);
     Serial.println("Bound interface to MIDI input.");
-
-    // Bind volume pot
-    MEMLNaut::Instance()->setRVGain1Callback([] (float value) {
-        AudioDriver::setDACVolume(value*4.0f);
-    });
 
     WRITE_VOLATILE(core_0_ready, true);
     while (!READ_VOLATILE(core_1_ready)) {
